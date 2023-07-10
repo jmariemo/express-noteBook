@@ -17,7 +17,7 @@ app.get("/notes", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/notes.html"))
 );
 
-app.get("/*", (req, res) =>
+app.get("/", (req, res) =>
   res.sendFile(path.join(__dirname, "/public/index.html"))
 );
 
@@ -26,12 +26,12 @@ app.get("/api/notes", (req, res) => {
   //log request to terminal
   console.log(`${req.method} request received to get notes`);
   //display notes data to client
-  fs.readFile("./db/notes.json", "utf-8", (err, reviews) => {
+  fs.readFile("./db/notes.json", "utf-8", (err, arrayOfNotes) => {
     if (err) {
       console.error(err);
       res.status(500).send("Error loading notes data");
     } else {
-      res.status(200).json(JSON.parse(notes));
+      res.status(200).json(JSON.parse(arrayOfNotes));
     }
   });
 });
