@@ -2,6 +2,11 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 const uuid = require("./helpers/uuid");
+const {
+  readFromFile,
+  readAndAppend,
+  writeToFile,
+} = require('./helpers/fsUtils');
 
 const PORT = process.env.PORT || 3001;
 
@@ -45,7 +50,7 @@ app.post("/api/notes", (req, res) => {
     const newNote = {
       title,
       text,
-      noteID: uuid(),
+      id: uuid(),
     };
 
     fs.readFile("./db/notes.json", function (err, data) {
@@ -75,6 +80,21 @@ app.post("/api/notes", (req, res) => {
   }
 });
 
+app.delete("/api/notes/:id", (req, res) => {
+  const noteId = req.params.id;
+  readFromFile("./db/notes.json")
+    .then((data) => JSON.parse(data))
+    .then((json) => {
+      // Make a new array of all tips except the one with the ID provided in the URL
+      const result = json.filter((note) => note.id !== noteId);
+
+      // Save that array to the filesystem
+      writeToFile("./db/notes.json", result);
+
+      // Respond to the DELETE request
+      res.json(`Note ${noteId} has been deleted 🗑️`);
+    });
+});
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
