@@ -10,8 +10,8 @@ My contribution can be summarized as building an Express.js back end to save and
 * Application is deployed to Heroku and loads with no errors
 
 ## Review
-Heroku deployment: https://express-notebook-69e0a52ea5b2.herokuapp.com/
-GitHub repository: https://github.com/jmariemo/express-noteBook
+* Heroku deployment: https://express-notebook-69e0a52ea5b2.herokuapp.com/
+* GitHub repository: https://github.com/jmariemo/express-noteBook
 
 ## GIF of page
 ![gif of app page](./public/assets/gif/express-notebook.gif)
