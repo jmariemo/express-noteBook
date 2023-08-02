@@ -1,5 +1,3 @@
-const app = require("express");
-// const path = require("path");
 const uuid = require("../helpers/uuid");
 const {
   readFromFile,
